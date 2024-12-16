@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보 입력</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='setting.css') }}">
+    <script src="{{ url_for('static', filename='setting.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>회원 정보 수정</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes" style="display: none;">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </header>
+
+    <main>
+        <h2>회원 정보 입력</h2>
+        <form method="POST" action="{{ url_for('loading') }}">
+            <!-- 나이 입력 -->
+            <label for="age">나이:</label>
+            <input type="number" id="age" name="age" min="0" required>
+            <br><br>
+
+            <label for="height">키:</label>
+            <input type="number" id="height" name="height" min="0" required>
+            <br><br>
+
+            <label for="weight">몸무게:</label>
+            <input type="number" id="weight" name="weight" min="0" required>
+            <br><br>
+
+            <label for="hypertension">고혈압 여부:</label>
+            <select id="hypertension" name="hypertension" required>
+                <option value="1">예</option>
+                <option value="0">아니오</option>
+            </select>
+            <br><br>
+
+            <label for="heart_disease">심장 질환 여부:</label>
+            <select id="heart_disease" name="heart_disease" required>
+                <option value="1">예</option>
+                <option value="0">아니오</option>
+            </select>
+
+            <!-- 제출 버튼 -->
+            <input type="submit" value="제출">
+        </form>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 뇌졸중 진단 프로그램. All rights reserved. @bmsw</p>
+    </footer>
+</body>
+</html>

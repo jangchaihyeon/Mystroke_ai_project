@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
+    <title>예측 결과</title>
+</head>
+<body>
+    <header>
+        <h1>예측 결과</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes" style="display: none;">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </header>
+
+    <main>
+        <section>
+            <h2>뇌졸중 예측 결과</h2>
+            <p>뇌졸중 발생 가능성이 {{ probability|round(2) }}%입니다.</p>
+
+            {% if probability <= 30 %}
+                <p>가능성이 없으므로 안심하셔도 좋습니다!</p>
+            {% elif 30 < probability <= 60 %}
+                <p>가능성이 있으므로 더욱 건강 관리에 유의해 주세요!</p>
+            {% else %}
+                <p>가능성이 높으므로 의사에게 상담 받아 보시는 것을 추천합니다.</p>
+            {% endif %}
+
+            <a href="{{ url_for('index') }}">돌아가기</a>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 뇌졸증 진단 프로그램. All rights reserved. @bmsw</p>
+    </footer>
+</body>
+</html>

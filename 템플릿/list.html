@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+    <script src="{{ url_for('static', filename='like.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <h1>{{ post.title }}</h1> <!-- 게시글 제목 -->
+    </header>
+
+    <main class="main-content">
+        <div class="post-block"> <!-- 고정된 높이를 가진 블록 -->
+            <p class="post-content">{{ post.content|safe }}</p> <!-- 긴 글을 감싸는 부분 -->
+        </div>
+        <div class="inline-group">
+            <span id="likes-count-{{ post.id }}">{{ post.likes }} 공감</span>
+            <button id="like-button-{{ post.category }}-{{ post.id }}" data-category="{{ post.category }}" data-post-id="{{ post.id }}">👍</button>
+            <a href="{{ url_for('post') }}">목록으로 돌아가기</a>
+            <form action="{{ url_for('deletepost', category=post.category, post_id=post.id) }}" method="POST" style="display:inline;">
+                <button type="submit">삭제</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

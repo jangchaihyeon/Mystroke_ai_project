@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뇌졸중 진단 프로젝트</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <p id="titlename">A stroke diagnosis</p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes" style="display: none;"> 
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            {% if current_user.is_authenticated %}
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li class="dropdown">
+                    <a href="#">내 정보</a>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('logout') }}">로그아웃</a>
+                        <a href="{{ url_for('post') }}">게시판</a>
+                        <a href="{{ url_for('choose') }}">자가진단</a>
+                    </div>
+                </li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li class="dropdown">
+                    <a href="#">내 정보</a>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('login') }}">로그인</a>
+                        <a href="{{ url_for('signup') }}">회원가입</a>
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
+        </header>
+        <section>
+            <br>
+            <p id="abc">뇌졸중 진단 서비스</p>
+            <p>안면인식을 통해 뇌졸중 의심 정도를 체크해보세요</p>
+            <a href="#">더 알아보기</a>
+        </section>
+        <footer>
+            <p>&copy; 2024 뇌졸중 진단 프로그램. All rights reserved. @bmsw </p>
+        </footer>
+    </div>
+</body>
+</html>

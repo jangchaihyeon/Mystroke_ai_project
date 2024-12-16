@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>옵션 선택 페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='choose.css') }}">
+</head>
+<body>
+    <header>
+        <h1>옵션 선택 페이지</h1>
+    </header>
 
+    <main>
+        <div id="upload-section">
+            <h2>진단 방식을 선택하세요</h2>
+            <form action="{{ url_for('upload') }}">
+                <button type="submit">이미지 파일 첨부하기</button>
+            </form>
+            <form action="{{ url_for('input_data') }}">
+                <button type="submit">CSV로 진단하기</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024. 모든 권리 보유.</p>
+    </footer>
+</body>
+</html>
